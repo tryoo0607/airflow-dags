@@ -1,13 +1,11 @@
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
-from airflow.utils.dates import days_ago
+from datetime import datetime, timezone
 
 with DAG(
         dag_id="hello_subdir_dag",
-        start_date=days_ago(1),
+        start_date=datetime(2025, 12, 11, tzinfo=timezone.utc),
         schedule=None,
         catchup=False,
-        tags=["test", "subdir"],
 ) as dag:
-
-    start = EmptyOperator(task_id="start")
+    EmptyOperator(task_id="start")
